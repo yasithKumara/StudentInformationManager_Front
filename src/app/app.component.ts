@@ -36,8 +36,8 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public getStudentsByClassID(): void {
-    this.studentService.getStudentsByClassID(2).subscribe(
+  public getStudentsByClassID(num:number): void {
+    this.studentService.getStudentsByClassID(num).subscribe(
       (response: Student[]) => {
         this.students = response;
         console.log(this.students);
@@ -49,8 +49,6 @@ export class AppComponent implements OnInit {
   }
 
   public onAddStudent(addForm: NgForm): void {
-
-    //document.getElementById('add-student-form').click();
     const myMaybeNullElement = document.getElementById('add-student-form');
     if (myMaybeNullElement === null) {
       alert('add-student-form element null');
@@ -63,7 +61,6 @@ export class AppComponent implements OnInit {
     
 
     this.studentService.addStudent(addForm.value,this.student.classID).subscribe(
-      //this.studentService.addStudent(addForm.value,this.student.classID).subscribe(
       (response: Student) => {
         console.log(response);
         this.getStudents();
@@ -75,18 +72,6 @@ export class AppComponent implements OnInit {
       }
     );
   }
-
-  // public onUpdateStudent(student: Student): void {
-  //   this.studentService.updateStudent(student).subscribe(
-  //     (response: Student) => {
-  //       console.log(response);
-  //       this.getStudents();
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       alert(error.message);
-  //     }
-  //   );
-  // }
 
   public onUpdateStudent(student: Student): void {
 
@@ -113,26 +98,24 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // public searchStudents(key: string): void {
-  //   console.log(key);
-  //   const results: Student[] = [];
-  //   for (const student of this.students) {
-  //     if (student.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
-  //     || student.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
-  //     || student.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
-  //     || student.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-  //       results.push(student);
-  //     }
-  //   }
-  //   this.students = results;
-  //   if (results.length === 0 || !key) {
-  //     this.getStudents();
-  //   }
-  // }
+  public searchStudents(key: string): void {
+    console.log(key);
+    const results: Student[] = [];
+    for (const student of this.students) {
+      if (student.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      // || student.address.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      ) {
+        results.push(student);
+      }
+    }
+    this.students = results;
+    if (results.length === 0 || !key) {
+      this.getStudents();
+    }
+  }
 
   public onOpenModal(student: Student, mode: string): void {
     
-    //const container = document.getElementById('main-container');
     const container = document.getElementById('main-container');
     
 
@@ -144,6 +127,7 @@ export class AppComponent implements OnInit {
       button.setAttribute('data-target', '#addStudentModal');
     }
     if (mode === 'edit') {
+      
       this.editStudent = student;
       button.setAttribute('data-target', '#updateStudentModal');
     }
@@ -152,8 +136,6 @@ export class AppComponent implements OnInit {
       button.setAttribute('data-target', '#deleteStudentModal');
     }
 
-
-    //container.appendChild(button);
     if (container === null) {
       alert('main-container element null');
     } else {

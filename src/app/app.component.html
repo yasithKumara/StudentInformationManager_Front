@@ -3,17 +3,27 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
-    <div *ngFor="let student of students" class="collapse navbar-collapse" id="navbarColor02">
-        <div *ngFor="let student of students" class="collapse navbar-collapse" id="navbarColor02"></div>
+    <div  class="collapse navbar-collapse" id="navbarColor02">
+        <!-- <div *ngFor="let student of students" class="collapse navbar-collapse" id="navbarColor02"></div> -->
        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
              <a class="nav-link" (click)="onOpenModal(student, 'add')">Add Student <span class="sr-only">(current)</span></a>
           </li>
        </ul>
-       <!-- <form class="form-inline my-2 my-lg-0">
+       <!-- Search by class-->>
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item active">
+            <a class="nav-link" (click)="getStudentsByClassID(1)">Class 1 <span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item active">
+            <a class="nav-link" (click)="getStudentsByClassID(2)">Class 2 <span class="sr-only">(current)</span></a>
+         </li>
+      </ul>
+       <!-- search students -->>
+       <form class="form-inline my-2 my-lg-0">
           <input type="search" (ngModelChange)="searchStudents(key.value)" #key="ngModel" ngModel
            name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required>
-       </form> -->
+       </form>
     </div>
   </nav>
 
@@ -37,6 +47,7 @@
                     <li class="list-group-item"><i ></i>Father's Name : {{student.fathersName}}</li>
                     <li class="list-group-item"><i ></i>Date of Birth : {{student.dateOfBirth}}</li>
                     <li class="list-group-item"><i ></i>Enrollment Date : {{student.enrollmentDate}}</li>
+                    <li class="list-group-item"><i ></i>Class ID : {{student.classID}}</li>
                     
 
                 </ul>
@@ -166,7 +177,6 @@
              <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button (click)="onDeleteStudent(deleteStudent.studentID)" class="btn btn-danger" data-dismiss="modal">Yes</button>
-                <!-- <button (click)="onDeleteStudent(deleteStudent?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button> -->
              </div>
           </div>
        </div>
